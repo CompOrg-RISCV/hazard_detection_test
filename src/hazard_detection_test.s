@@ -37,7 +37,6 @@ _start:
      nop
      nop
      nop
-     halt
      nop
      nop
      nop
@@ -63,7 +62,6 @@ _start:
      nop
      nop
      nop
-     halt
      nop
      nop
      nop
