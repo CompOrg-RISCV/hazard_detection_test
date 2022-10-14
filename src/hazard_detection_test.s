@@ -69,7 +69,7 @@ _start:
 // rs2 is a new set of logic, so all test conditions are required as in the rs1 I-TYPE tests
      addi x4, x0, 1		                    // x4 = 1
      add x4, x2, x4		                    // EXMEM data hazard, x4 = 10 + 1 = 11
-     add x4, x2, x4		                    // EXMEM over WB data hazard, x4 = 11 + 10 = 21
+     add x4, x2, x4		                    // EXMEM over MEMWB data hazard, x4 = 11 + 10 = 21
      add x4, x2, x4		                    // EXMEM over WB data hazard, x4 = 21 + 10 = 31
      nop
      nop                   // x4 = 1
