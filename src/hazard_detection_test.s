@@ -74,10 +74,10 @@ _start:
      add x4, x2, x4		                    // EXMEM over WB data hazard, x4 = 11 + 10 = 21
      add x4, x2, x4		                    // EXMEM over WB data hazard, x4 = 21 + 10 = 31
      nop
-     nop                // x4 = 1
-     nop                // x4 = 11 (0xb)
-     nop                // x4 = 21 (0x15)
-     nop                // x4 = 31 (0x1f)
+     nop                   // x4 = 1
+     nop                   // x4 = 11 (0xb)
+     nop                   // x4 = 21 (0x15)
+     nop                   // x4 = 31 (0x1f)
      addi x1, x0, 1                         // x1=1
      add x2, x0, x1                         // x2=1
      nop
