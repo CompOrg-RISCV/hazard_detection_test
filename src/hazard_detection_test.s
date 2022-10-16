@@ -22,13 +22,13 @@ _start:
      nop                    // x2 = 10 (0xa)
      addi x2, x0, 1                         // x2=1
      nop
-     addi x2, x2, 2                         // MEMWB data hazard, x2=3
+     addi x2, x2, 2                         // MEMWB (MEM Stage) data hazard, x2=3
      addi x2, x2, 3                         // x2=6
      nop
      addi x2, x2, 4         // x2 = 1       // valdates MEMWB over WB data hazard, x2=10
      nop
      nop                    // x2 = 3
-     addi x2, x2, 5         // x2 = 6       // validates WB data hazard, x2=5
+     addi x2, x2, 5         // x2 = 6       // validates WB stage data hazard, x2=5
      nop
      nop                    // x2 = 10 (0xa)
      nop
@@ -84,13 +84,13 @@ _start:
      nop                    // x1 = 1
      add x2, x0, x1                         // x2=1
      nop
-     add x2, x1, x2                         // MEMWB data hazard, x2=2
+     add x2, x1, x2                         // MEMWB (MEM stage) data hazard, x2=2
      add x2, x1, x2                         // x2=3
      nop                    
      add x2, x1, x2         // x2 = 1       // valdates MEMWB over WB data hazard, x2=4
      nop
      nop                    // x2 = 2
-     add x2, x1, x2         // x2 = 3       // validates WB data hazard, x2=5
+     add x2, x1, x2         // x2 = 3       // validates WB stage data hazard, x2=5
      nop
      nop                    // x2 = 4
      nop
