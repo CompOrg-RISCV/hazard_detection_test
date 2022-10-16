@@ -13,8 +13,8 @@ _start:
 // Testing data forward from the EXMEM and MEMWB pipeline registers and the WB pipeline stage
      addi  x2, x0, 1                        // x2=1
      addi  x2, x2, 2                        // EXMEM data hazard, x2=3
-     addi  x2, x2, 3                        // validates EXMEM over MEMWB data hazard, x2=6
-     addi  x2, x2, 4                        // validates EXMEM over WB data hazard, x2=10
+     addi  x2, x2, 3                        // validates EXMEM over MEMWB or MEM stage data hazard, x2=6
+     addi  x2, x2, 4                        // validates EXMEM over WB or WB data hazard, x2=10
      nop
      nop                    // x2 = 1
      nop                    // x2 = 3
@@ -51,8 +51,8 @@ _start:
      nop
      addi x3, x0, 1		                    // x3 = 1
      add x3, x3, x2		                    // EXMEM data hazard, x3 = 1 + 10 = 11
-     add x3, x3, x2		    // x2 = 10 (0xa)// EXMEM over MEMWB data hazard, x3 = 11 + 10 = 21
-     add x3, x3, x2		                    // EXMEM over WB data hazard, x3 = 21 + 10 = 31
+     add x3, x3, x2		    // x2 = 10 (0xa)// EXMEM over MEMWB or MEM stage data hazard, x3 = 11 + 10 = 21
+     add x3, x3, x2		                    // EXMEM over WB or WB data hazard, x3 = 21 + 10 = 31
      nop
      nop                    // x3 = 1
      nop                    // x3 = 11 (0xb)
@@ -69,19 +69,24 @@ _start:
 // rs2 is a new set of logic, so all test conditions are required as in the rs1 I-TYPE tests
      addi x4, x0, 1		                    // x4 = 1
      add x4, x2, x4		                    // EXMEM data hazard, x4 = 10 + 1 = 11
-     add x4, x2, x4		                    // EXMEM over MEMWB data hazard, x4 = 11 + 10 = 21
-     add x4, x2, x4		                    // EXMEM over WB data hazard, x4 = 21 + 10 = 31
+     add x4, x2, x4		                    // EXMEM over MEMWB or MEM stage data hazard, x4 = 11 + 10 = 21
+     add x4, x2, x4		                    // EXMEM over WB or WB data hazard, x4 = 21 + 10 = 31
      nop
      nop                   // x4 = 1
      nop                   // x4 = 11 (0xb)
      nop                   // x4 = 21 (0x15)
      nop                   // x4 = 31 (0x1f)
      addi x1, x0, 1                         // x1=1
+     nop
+     nop
+     nop
+     nop
+     nop                    // x1 = 1
      add x2, x0, x1                         // x2=1
      nop
      add x2, x1, x2                         // MEMWB data hazard, x2=2
      add x2, x1, x2                         // x2=3
-     nop                    // x1 = 1
+     nop                    
      add x2, x1, x2         // x2 = 1       // valdates MEMWB over WB data hazard, x2=4
      nop
      nop                    // x2 = 2
